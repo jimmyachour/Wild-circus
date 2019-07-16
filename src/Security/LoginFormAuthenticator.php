@@ -81,12 +81,19 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
+        $roles = $token->getRoles();
+
+        $rolesTab = array_map(function ($roles) {
+            return $roles->getRole();
+        }, $roles);
+
+        if (in_array('ROLE_ADMIN', $rolesTab, true)) {
+            $redirection = new RedirectResponse($this->urlGenerator->generate('circus_home'));
+        } else {
+            $redirection = new RedirectResponse($this->urlGenerator->generate('circus_home'));
         }
 
-        // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return $redirection;
     }
 
     protected function getLoginUrl()

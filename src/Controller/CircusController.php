@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CircusController extends AbstractController
 {
     /**
-     * @Route("/accueil", name="home")
+     * @Route("/", name="home")
      */
     public function index()
     {

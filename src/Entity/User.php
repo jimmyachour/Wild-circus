@@ -3,10 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields= {"email"},
+ *     message= "L'email que vous avez indiqué est déjà utilisé !"
+ * )
  */
 class User implements UserInterface
 {
@@ -16,6 +22,26 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -33,21 +59,28 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Merci de saisir deux mots de passe identiques")
+     */
+    private $confirm_password;
+
+    /*************** **************/
+    /*********** GETTER ***********/
+    /*************** **************/
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -58,6 +91,45 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
+    {
+        return (string) $this->password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmPassword()
+    {
+        return $this->confirm_password;
     }
 
     /**
@@ -72,19 +144,43 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    /*************** **************/
+    /*********** SETTER ***********/
+    /*************** **************/
+
+    public function setLastname(string $lastname): self
     {
-        $this->roles = $roles;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function setFirstname(string $firstname): self
     {
-        return (string) $this->password;
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function setBirthDate(\DateTimeInterface $birthDate): self
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
     }
 
     public function setPassword(string $password): self
@@ -95,11 +191,18 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @param mixed $confirm_password
      */
-    public function getSalt()
+    public function setConfirmPassword($confirm_password): void
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        $this->confirm_password = $confirm_password;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     /**
