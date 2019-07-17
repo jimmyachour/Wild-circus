@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
-use App\Entity\User;
-use App\Repository\CartRepository;
 use App\Repository\TicketRepository;
+use App\Services\Mailer;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -35,7 +34,7 @@ class CartController extends AbstractController
     /**
      * @Route("/validation-commande", name="validation")
      */
-    public function cartValidation(Session $session,TicketRepository $ticketRepository, ObjectManager $manager)
+    public function cartValidation(Session $session,TicketRepository $ticketRepository,Mailer $mailer, ObjectManager $manager)
     {
         $order = $session->get('cart');
         $cart = new Cart();
@@ -50,6 +49,9 @@ class CartController extends AbstractController
         $cart->setDate(new \DateTime());
 
         $manager->persist($cart);
+
+        $mailer->sendTicket($cart);
+
         $manager->flush();
 
         $this->addFlash('success', 'Merci pour votre achat');

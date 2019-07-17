@@ -25,3 +25,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Services\Mailer:
+        arguments:
+            $sender: '%env(MAILER_SENDER)%'
+            $recipient: '%env(MAILER_RECIPIENT)%'
+            $mailer: '@Swift_Mailer'
+            $twig: '@Twig\Environment'

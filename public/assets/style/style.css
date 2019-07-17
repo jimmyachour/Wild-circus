@@ -321,6 +321,12 @@ footer {
   top: -400px;
 }
 
+@media (min-width: 374px) {
+  .img-pierot {
+    top: -400px;
+  }
+}
+
 .form-ticket {
   width: 100%;
   height: calc(1.5em + .75rem + 2px);
