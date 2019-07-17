@@ -3,32 +3,36 @@
 {% block body %}
     <header class="masthead">
         <div class="container d-flex h-100 align-items-center">
-            <form method="post">
-                <div class="row">
+            <form class="ticket" method="post">
                     {% for ticket in tickets %}
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="assets/img/ticket.jpg" alt="Card image cap">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                Wild-Circus
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ ticket.title }} {{ ticket.price }}€</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                    of the card's content.</p>
-                                <div class="form-group row">
-                                    <label for="example-number-input" class="col-2 col-form-label"></label>
-                                    <div class="col-10">
-                                        <input class="form-control"
-                                               name="ticket[{{ ticket.id }}]" type="number"
-                                                {% if app.session.get('cart') is not null %}
-                                                    value="{{ app.session.get('cart')[ticket.id] }}"
-                                                {% else %}
-                                                    value="0"
-                                                {% endif %} id="example-number-input">
-                                    </div>
-                                </div>
+                                <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                {% if app.user %}
+                                        <label for="example-number-input" class="col-2 col-form-label"></label>
+                                        <div class="col-12">
+                                            <input class="form-ticket col-3"
+                                                   name="ticket[{{ ticket.id }}]" min="0" type="number"
+                                                    {% if app.session.get('cart') is not null %}
+                                                        value="{{ app.session.get('cart')[ticket.id] }}"
+                                                    {% else %}
+                                                        value="0"
+                                                    {% endif %} id="example-number-input">
+                                            <input type="submit" class="btn btn-primary">
+                                        </div>
+                                {% else %}
+                                    <a href="{{ path('app_login') }}" class="btn btn-primary">Connectez-vous</a>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer text-muted">
+                                Gratuit pour les enfants
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-                <input type="submit">
             </form>
         </div>
     </header>

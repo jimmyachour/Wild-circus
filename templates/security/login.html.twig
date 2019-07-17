@@ -20,6 +20,8 @@
 
         {% if app.user %}
             <div class="checkbox mb-3">Vous êtes déjà connecté sous {{ app.user.username }}, <a href="{{ path('app_logout') }}">Deconnexion</a></div>
+        {% else %}
+            <div class="checkbox mb-3">Vous êtes nouveau ? Inscrivez-vous <a href="{{ path('app_registration') }}">=> Inscription</a></div>
         {% endif %}
 
         {#

@@ -21,7 +21,16 @@
                     <a class="nav-link js-scroll-trigger" href="{{ path('circus_ticket') }}">Billeterie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="{{ path('app_login') }}">Connexion</a>
+                    {% if app.user %}
+                        <a class="nav-link js-scroll-trigger" href="{{ path('cart_index') }}">Panier</a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    {% if app.user %}
+                        <a class="nav-link js-scroll-trigger" href="{{ path('app_logout') }}">Deconnexion</a>
+                    {% else %}
+                        <a class="nav-link js-scroll-trigger" href="{{ path('app_login') }}">Connexion</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>

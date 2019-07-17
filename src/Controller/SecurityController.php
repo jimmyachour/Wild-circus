@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="registration")
+     * @Route("/inscription", name="app_registration")
      * @param Request $request
      * @param ObjectManager $manager
      * @param UserPasswordEncoderInterface $encoder

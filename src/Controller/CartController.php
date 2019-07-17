@@ -21,11 +21,15 @@ class CartController extends AbstractController
      */
     public function cart(Session $session, TicketRepository $ticketRepository)
     {
-        foreach ($session->get('cart') as $idTicket => $qty) {
-            $allTickets[] =  [ 'qty' => $qty, 'ticket' => $ticketRepository->find($idTicket)];
+        if (!empty($session->get('cart'))) {
+            foreach ($session->get('cart') as $idTicket => $qty) {
+                $allTickets[] =  [ 'qty' => $qty, 'ticket' => $ticketRepository->find($idTicket)];
+            }
+
+            return $this->render('circus/cart/index.html.twig', ['allTickets' => $allTickets]);
         }
 
-        return $this->render('circus/cart/index.html.twig', ['allTickets' => $allTickets]);
+        return $this->redirectToRoute('circus_ticket');
     }
 
     /**
