@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+            <div class="container mb-4">
+                <div class="row">
+                    <div class="col-12 form-cart">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col"> </th>
+                                    <th scope="col">Place</th>
+                                    <th scope="col" class="text-center">Quantité</th>
+                                    <th scope="col" class="text-right">Prix</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% set ttCart = 0 %}
+                                {% set ttTicket = 0 %}
+                                {% for ticketCart in allTickets %}
+                                    <tr>
+                                        <td><img src="assets/img/icone-ticket.jpg" /> </td>
+                                        <td>{{ ticketCart.ticket.title }}</td>
+                                        <td class="text-center">{{ ticketCart.qty }}</td>
+                                        <td class="text-right">{{ ticketCart.qty*ticketCart.ticket.price }}€</td>
+                                    </tr>
+                                    {% set ttTicket = ttTicket + ticketCart.qty %}
+                                    {% set ttCart = ttCart + (ticketCart.qty*ticketCart.ticket.price) %}
+                                {% endfor %}
+                                <tr>
+                                    <td><strong>Nombre Place</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"><strong>{{ ttTicket }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total</strong></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"><strong>{{ ttCart }}€</strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col mb-2">
+                        <div class="row">
+                            <div class="col-sm-12  col-md-6">
+                                <a href="{{ path('circus_ticket') }}" class="btn btn-block btn-light">Retour billeterie</a>
+                            </div>
+                            <div class="col-sm-12 col-md-6 text-right">
+                                <a href="{{ path('cart_validation')}}" class="btn btn-lg btn-block btn-success text-uppercase">Valider la commande</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}

@@ -320,3 +320,11 @@ footer {
   position: absolute;
   top: -400px;
 }
+
+/******* Cart **********/
+.form-cart {
+  background-color: white;
+  margin-bottom: 100px;
+}
+
+

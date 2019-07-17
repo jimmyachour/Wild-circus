@@ -6,6 +6,13 @@
     <header class="masthead">
         <div class="container d-flex h-100 align-items-center">
             <div class="mx-auto text-center">
+                {% for category, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
                 <h1 class="mx-auto my-0 text-uppercase">Wild-Circus</h1>
                 <h2 class="text-white-50 mx-auto mt-2 mb-5">Bienvenue dans le monde merveilleux et féerique du Wild-Circus</h2>
                 <a href="{{ path('circus_ticket') }}" class="btn btn-primary js-scroll-trigger">Acheter une place</a>
@@ -154,13 +161,13 @@
 
             <div class="social d-flex justify-content-center">
                 <a href="#" class="mx-2">
-                    <i class="fab fa-twitter"></i>
+                    <i class="fa fa-twitter"></i>
                 </a>
                 <a href="#" class="mx-2">
-                    <i class="fab fa-facebook-f"></i>
+                    <i class="fa fa-facebook-f"></i>
                 </a>
                 <a href="#" class="mx-2">
-                    <i class="fab fa-github"></i>
+                    <i class="fa fa-github"></i>
                 </a>
             </div>
 

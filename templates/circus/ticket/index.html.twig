@@ -15,7 +15,13 @@
                                 <div class="form-group row">
                                     <label for="example-number-input" class="col-2 col-form-label"></label>
                                     <div class="col-10">
-                                        <input class="form-control" name="ticket[{{ ticket.id }}]" type="number" value="0" id="example-number-input">
+                                        <input class="form-control"
+                                               name="ticket[{{ ticket.id }}]" type="number"
+                                                {% if app.session.get('cart') is not null %}
+                                                    value="{{ app.session.get('cart')[ticket.id] }}"
+                                                {% else %}
+                                                    value="0"
+                                                {% endif %} id="example-number-input">
                                     </div>
                                 </div>
                             </div>
