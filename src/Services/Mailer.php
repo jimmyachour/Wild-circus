@@ -36,4 +36,16 @@ class Mailer
             ), 'text/html');
         $this->mailer->send($message);
     }
+
+    public function sendSubscription($mail)
+    {
+        $message = (new \Swift_Message())
+            ->setFrom($this->sender)
+            ->setTo($this->recipient)
+            ->setSubject('Souscription newsletter')
+            ->setBody($this->twig->render(
+                '/mail/subscription.html.twig'
+            ), 'text/html');
+        $this->mailer->send($message);
+    }
 }
