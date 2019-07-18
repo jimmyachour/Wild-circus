@@ -44,6 +44,10 @@ class Cart
         $this->tickets = new ArrayCollection();
     }
 
+    /*************** **************/
+    /*********** GETTER ***********/
+    /*************** **************/
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,20 +59,48 @@ class Cart
         return $this->user;
     }
 
-    public function setUser(?User $user): self
-    {
-
-        $this->user = $user;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Ticket[]
      */
     public function getTickets(): Collection
     {
         return $this->tickets;
+    }
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    /*************** **************/
+    /*********** SETTER ***********/
+    /*************** **************/
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function setUser(?User $user): self
+    {
+
+        $this->user = $user;
+
+        return $this;
     }
 
     public function addTicket(Ticket $ticket): self
@@ -89,27 +121,7 @@ class Cart
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
 
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
-        return $this;
-    }
 
-    public function getQuantity(): ?int
-    {
-        return $this->quantity;
-    }
-
-    public function setQuantity(int $quantity): self
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
 }

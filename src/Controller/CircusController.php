@@ -28,15 +28,17 @@ class CircusController extends AbstractController
 
         $newsletterForm->handleRequest($request);
 
-        if($newsletterForm->isSubmitted() && !$newsletterForm->isValid()) {
-            $this->addFlash('danger', 'Désolé, mais votre mail est déjà dans nos contacts.');
-        }
+        if($newsletterForm->isSubmitted()) {
 
-        if($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
-            $manager->persist($newsletter);
-            $manager->flush();
+            if($newsletterForm->isValid()) {
+                $manager->persist($newsletter);
+                $manager->flush();
 
-            $this->addFlash('success', 'Merci pour votre inscription à notre newsletter !');
+                $this->addFlash('success', 'Merci pour votre inscription à notre newsletter !');
+
+            } else {
+                $this->addFlash('danger', 'Désolé, mais votre mail n\'est pas valable');
+            }
         }
 
         return $this->render('circus/home/index.html.twig', ['newsletterForm' => $newsletterForm->createView()]);

@@ -90,7 +90,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if (in_array('ROLE_ADMIN', $rolesTab, true)) {
             $redirection = new RedirectResponse($this->urlGenerator->generate('circus_home'));
         } else {
-            $redirection = new RedirectResponse($this->urlGenerator->generate('circus_home'));
+            $redirection = new RedirectResponse($this->urlGenerator->generate('circus_ticket'));
         }
 
         return $redirection;

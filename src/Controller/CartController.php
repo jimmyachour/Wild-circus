@@ -34,7 +34,7 @@ class CartController extends AbstractController
     /**
      * @Route("/validation-commande", name="validation")
      */
-    public function cartValidation(Session $session,TicketRepository $ticketRepository,Mailer $mailer, ObjectManager $manager)
+    public function cartValidation(Session $session,TicketRepository $ticketRepository,Mailer $mailer,ObjectManager $manager)
     {
         $order = $session->get('cart');
         $cart = new Cart();

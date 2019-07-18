@@ -38,6 +38,10 @@ class Ticket
         $this->users = new ArrayCollection();
     }
 
+    /*************** **************/
+    /*********** GETTER ***********/
+    /*************** **************/
+
     public function getId(): ?int
     {
         return $this->id;
@@ -48,36 +52,9 @@ class Ticket
         return $this->price;
     }
 
-    public function setPrice(float $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
     public function getTitle(): ?string
     {
         return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-
-        $this->user = $user;
-
-        return $this;
     }
 
     /**
@@ -86,6 +63,32 @@ class Ticket
     public function getUsers(): Collection
     {
         return $this->users;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /*************** **************/
+    /*********** SETTER ***********/
+    /*************** **************/
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function setUser(?User $user): self
+    {
+
+        $this->user = $user;
+
+        return $this;
     }
 
     public function addUser(User $user): self
