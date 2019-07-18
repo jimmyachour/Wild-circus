@@ -39,15 +39,6 @@ class SecurityController extends AbstractController
 
             $manager->persist($user);
             $manager->flush();
-            /*
-            $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('jimmyachour@hotmail.fr')
-                ->setTo($user->getEmail())
-                ->setBody('coucou beau gosse', 'text/plain')
-            ;
-
-            $mailer->send($message);
-            */
 
             return $this->redirectToRoute('app_login');
         }

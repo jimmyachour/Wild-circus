@@ -86,7 +86,7 @@
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
                             <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <h4 class="text-white">Féerie</h4>
+                                <h4 class="text-white">Féérique</h4>
                                 <p class="mb-0 text-white-50">Cumque pertinacius ut legum gnarus accusatorem flagitaret atque sollemnia, doctus id Caesar libertatemque superbiam ratus tamquam obtrectatorem audacem</p>
                                 <hr class="d-none d-lg-block mb-0 mr-0">
                             </div>
@@ -103,15 +103,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
-
                     <i class="fa fa-paper-plane fa-2x mb-2 text-white"></i>
                     <h2 class="text-white mb-5">Inscrivez-vous à notre news-letter !</h2>
-
-                    <form class="form-inline d-flex">
-                        <input type="email" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Entrez votre e-mail...">
-                        <button type="submit" class="btn btn-primary mx-auto">Je m'abonne</button>
-                    </form>
-
+                    {{ form_start(newsletterForm) }}
+                    {{ form_row(newsletterForm.mail,{'attr':{'class': 'form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0', 'placeholder' : 'Entrez-votre mail...'}}) }}
+                    <button type="submit" class="btn btn-primary mx-auto">Je m'abonne</button>
+                    {{ form_end(newsletterForm) }}
                 </div>
             </div>
         </div>

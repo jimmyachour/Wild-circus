@@ -54,6 +54,8 @@ class CartController extends AbstractController
 
         $manager->flush();
 
+        $session->clear();
+
         $this->addFlash('success', 'Merci pour votre achat');
 
         return $this->redirectToRoute('circus_home');
